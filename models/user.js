@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const schema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -18,7 +18,16 @@ const schema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    // New fields for referral points and referred users count
+    referralPoints: {
+        type: Number,
+        default: 0
+    },
+    referredUsersCount: {
+        type: Number,
+        default: 0
     }
-})
+});
 
-export const User = mongoose.model("User", schema);
+export const User = mongoose.model("User", userSchema);

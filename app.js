@@ -5,7 +5,7 @@ import {config} from "dotenv";
 import cookieParser from "cookie-parser";
 import e from "express";
 import { errorMiddleware } from "./middleware/error.js";
-import cors from "cors";
+import referralRouter from "./routes/referralRoutes.js";
 
 export const app = express();
 
@@ -20,6 +20,7 @@ app.use(cookieParser());
 //user routers
 app.use("/users",userRouter);
 app.use("/products",productRouter);
+app.use("/referral",referralRouter);
 
 app.get("/", (req, res) => {
     res.send("Hello World!");

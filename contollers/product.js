@@ -15,7 +15,7 @@ export const newProduct = async (req, res, next) => {
     
         res.status(201).json({
             success: true,
-            message: "Task created successfully"
+            message: "Product listed successfully"
         });
     } catch (error) {
         next(error);
@@ -71,7 +71,7 @@ export const deleteProduct = async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        message: "Task deleted successfully"
+        message: "Product deleted successfully"
     })
     } catch (error) {
         next(error);

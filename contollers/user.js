@@ -2,6 +2,7 @@ import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
 import { sendCookie } from "../utils/feature.js";
 import ErrorHandler from "../middleware/error.js";
+import { Referral } from "../models/referral.js";
 
 //ye admin panel hai jis se sare user dikhe ge
 export const getAllUser = async (req, res, next) => {
@@ -32,7 +33,7 @@ export const login = async (req, res, next) => {
     
     const {email, password} = req.body;
 
-    const user = await User.findOne({email}).select("+password"); //+pass isliye kynke humne models me select false kiya wa hai to access karne ke liye
+    const user = await User.findOne({email}).select("+password");
 
     if(!user)
         return next(new ErrorHandler("USer not found", 400));
@@ -48,14 +49,43 @@ export const login = async (req, res, next) => {
 
 }
 
-export const getMyProfile = (req, res, next) => {
+export const getMyProfile = async (req, res, next) => {
+    try {
+        const currentUser = await User.findById(req.user._id);
 
-    res.status(200).json({
-        success: true,
-        user: req.user,
-    })  
+        if (!currentUser) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
 
-}
+        const referrals = await Referral.find({ referrer: currentUser._id });
+
+        let referredUsersCount = 0;
+        let referralPoints = 0;
+
+        referrals.forEach(referral => {
+            if (referral.pointsGiven) {
+                referralPoints += 1; // Adjust this logic based on your points system
+            }
+            referredUsersCount++;
+        });
+
+        res.status(200).json({
+            success: true,
+            user: {
+                _id: currentUser._id,
+                name: currentUser.name,
+                email: currentUser.email,
+                referralPoints,
+                referredUsersCount
+            }
+        });
+    } catch (error) {
+        next(error);
+    }
+};
 
 export const logout = (req, res, next) => {
 
