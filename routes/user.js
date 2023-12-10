@@ -1,6 +1,7 @@
 import express from "express";
-import { getAllUser, register, login, getMyProfile, logout } from "../contollers/user.js";
+import { getAllUser, register, login, getMyProfile, addFeedback, logout } from "../contollers/user.js";
 import { isAuthenticated } from "../middleware/auth.js";
+
 
 const router = express.Router();
 
@@ -11,6 +12,8 @@ router.post("/new", register);
 router.post("/login", login);
 
 router.get("/me", isAuthenticated, getMyProfile);
+
+router.post("/feedback", isAuthenticated, addFeedback);
 
 router.get("/logout", logout)
 

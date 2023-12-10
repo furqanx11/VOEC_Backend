@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    // New fields for referral points and referred users count
     referralPoints: {
         type: Number,
         default: 0
@@ -27,6 +26,9 @@ const userSchema = new mongoose.Schema({
     referredUsersCount: {
         type: Number,
         default: 0
+    },
+    feedback: {
+        type: String
     }
 });
 

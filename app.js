@@ -7,6 +7,7 @@ import e from "express";
 import { errorMiddleware } from "./middleware/error.js";
 import referralRouter from "./routes/referralRoutes.js";
 
+
 export const app = express();
 
 config({
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use("/users",userRouter);
 app.use("/products",productRouter);
 app.use("/referral",referralRouter);
+
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
