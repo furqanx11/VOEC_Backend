@@ -28,8 +28,6 @@ module.exports.order_status = (req, res) => {
             }
 
             console.log(customerLocation);
-            
-            
 
             const storeLocation = { latitude: 24.8067, longitude: 67.0284 }; 
 
