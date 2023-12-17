@@ -2,7 +2,8 @@ const db = require('../../db');
 
   
 function calculatePercentageRemaining(lat1, lon1, lat2, lon2) {
-    return ((lat1 - lat2) / (lon1 - lon2))*100;
+    distance = Math.sqrt((lat1 - lat2) ** 2 + (lon2 - lon2) ** 2);
+    return distance*100;
   }
   
   

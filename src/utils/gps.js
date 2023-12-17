@@ -1,16 +1,7 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-
-const app = express();
-const PORT = 3000;
-
-
 const branches = [
     { id: 1, name: 'Branch A', latitude: 70.7749, longitude: -200.4194 },
     { id: 2, name: 'Branch B', latitude: 34.0522, longitude: -118.2437 },
 ];
-
-app.use(bodyParser.json());
 
 
 module.exports.get_nearestBranch = (req, res) => {
@@ -48,6 +39,3 @@ function findNearestBranch(customerLat, customerLng) {
     return nearestBranch;
 }
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
