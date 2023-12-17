@@ -6,14 +6,14 @@ const PORT = 3000;
 
 
 const branches = [
-    { id: 1, name: 'Branch A', latitude: 37.7749, longitude: -122.4194 },
+    { id: 1, name: 'Branch A', latitude: 70.7749, longitude: -200.4194 },
     { id: 2, name: 'Branch B', latitude: 34.0522, longitude: -118.2437 },
 ];
 
 app.use(bodyParser.json());
 
 
-app.post('/get_nearest_branch', (req, res) => {
+module.exports.get_nearestBranch = (req, res) => {
     try {
         
         const { latitude, longitude } = req.body.location;
@@ -25,7 +25,7 @@ app.post('/get_nearest_branch', (req, res) => {
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
-});
+};
 
 function findNearestBranch(customerLat, customerLng) {
     let nearestBranch = null;
