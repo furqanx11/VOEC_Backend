@@ -103,3 +103,23 @@ module.exports.comparison = (req, res) => {
         }
     });
 };
+
+module.exports.createFeedback = (req, res) => {
+    const { userID, prodID, comment } = req.body;
+
+    const query = `INSERT INTO feedback (UserID, ProdID, Comment) VALUES (?, ?, ?)`;
+
+    db.query(query, [userID, prodID, comment], (error, results) => {
+        if (error) {
+            console.error('Could not execute query.', error);
+            res.status(500).send('An error occurred while adding feedback.');
+            return;
+        }
+
+        if (results) {
+            res.status(200).send('Feedback added successfully');
+        } else {
+            res.status(404).send('An error occurred while adding feedback.');
+        }
+    });
+};
