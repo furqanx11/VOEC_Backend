@@ -1,3 +1,4 @@
+
 const db = require('../../db');
 
 module.exports.login = (req, res) => {
@@ -14,8 +15,9 @@ module.exports.login = (req, res) => {
 
         if (results.length > 0) {
             const comparison = Pwd == results[0].Pwd;
+            const user_id = results[0].UserID;
             if (comparison) {
-                res.status(200).send('User authenticated.');
+                res.status(200).send({message: 'User authenticated.', userId: user_id});
             } else {
                 res.status(401).send('Wrong password.');
             }
@@ -24,3 +26,4 @@ module.exports.login = (req, res) => {
         }
     });
 };
+
