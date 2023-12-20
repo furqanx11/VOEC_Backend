@@ -3,7 +3,7 @@ const db = require('../../db');
 module.exports.create = (req, res) => {
     const { title, image, description, price, brandID, quantity} = req.body;
 
-    // check brand
+
     if(brandID){
         const checkBrand = `SELECT BrandName FROM brand WHERE BrandID = '${brandID}'`;
             
@@ -105,21 +105,17 @@ module.exports.comparison = (req, res) => {
 };
 
 module.exports.createFeedback = (req, res) => {
-    const { userID, prodID, comment } = req.body;
+    const { prodID, comment } = req.body;
 
-    const query = `INSERT INTO feedback (UserID, ProdID, Comment) VALUES (?, ?, ?)`;
-
-    db.query(query, [userID, prodID, comment], (error, results) => {
-        if (error) {
-            console.error('Could not execute query.', error);
-            res.status(500).send('An error occurred while adding feedback.');
+    const insertFeedbackQuery = 'INSERT INTO feedback (ProdID, Comment) VALUES (?, ?)';
+    
+    db.query(insertFeedbackQuery, [prodID, comment], (insertError, insertResults) => {
+        if (insertError) {
+            console.error('Error inserting feedback:', insertError);
+            res.status(500).send('Error inserting feedback');
             return;
         }
-
-        if (results) {
-            res.status(200).send('Feedback added successfully');
-        } else {
-            res.status(404).send('An error occurred while adding feedback.');
-        }
+        
+        res.status(200).send('Feedback added successfully');
     });
 };

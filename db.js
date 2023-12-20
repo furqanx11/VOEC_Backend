@@ -16,13 +16,12 @@ db.connect((error) => {
     }
     console.log('Connected to the database.');
     
-    // Select the database to use
     db.query(`USE ${process.env.DB}`, (err) => {
         if (err) {
             console.error('Error selecting database:', err);
             process.exit(1);
         }
-        console.log('Database selected.');
+        console.log(`Database selected. '${process.env.DB}'`);
     });
 });
 

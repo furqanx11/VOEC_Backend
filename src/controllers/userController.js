@@ -144,11 +144,10 @@ module.exports.addReferralPoints = (req, res) => {
             return;
         }
 
-        // Update logic based on your database structure
-        // Modify this part to fit your schema
+        
         const [referrer, referred] = results;
 
-        // Example update query, replace with your actual update logic
+        
         const updateQuery = `
             UPDATE users
             SET ReferrerPoints = ReferrerPoints + 1, ReferredPoints = ReferredPoints + 1

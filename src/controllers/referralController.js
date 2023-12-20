@@ -1,4 +1,4 @@
-// referralController.js
+
 
 const db = require('../../db');
 
@@ -22,7 +22,7 @@ exports.addReferralPoints = (req, res) => {
             return;
         }
 
-        // Modify the update logic to match your schema
+       
         const [referrer, referred] = results;
 
         const updateQuery = `
